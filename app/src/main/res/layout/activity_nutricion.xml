@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGISTRO DE COMIDAS"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#2E7D32"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#E8F5E9"
+        android:padding="20dp"
+        android:layout_marginBottom="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calorías de hoy:"
+            android:textSize="16sp"
+            android:textColor="#1B5E20" />
+
+        <TextView
+            android:id="@+id/tvCaloriasTotales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 / 2500 kcal"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etNombreAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="¿Qué has comido? (ej: Arroz)"
+        android:inputType="text"
+        android:layout_marginBottom="15dp"/>
+
+    <EditText
+        android:id="@+id/etCaloriasAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad de calorías"
+        android:inputType="number"
+        android:layout_marginBottom="25dp"/>
+
+    <Button
+        android:id="@+id/btnAnadirAlimento"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="AÑADIR ALIMENTO"
+        android:backgroundTint="#4CAF50"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VOLVER AL MENÚ"
+        android:backgroundTint="#9E9E9E"
+        android:layout_marginTop="10dp"
+        app:cornerRadius="8dp"/>
+
+</LinearLayout>
