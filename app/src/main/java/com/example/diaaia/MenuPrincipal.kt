@@ -2,8 +2,8 @@ package com.example.diaaia
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 
 class MenuPrincipal : AppCompatActivity() {
 
@@ -11,26 +11,27 @@ class MenuPrincipal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_principal)
 
-        // 1. Enlazamos los botones del XML
-        val btnEntrenamiento = findViewById<Button>(R.id.btnEntrenamiento)
-        val btnDieta = findViewById<Button>(R.id.btnDieta)
-        val btnIA = findViewById<Button>(R.id.btnProgresoIA)
+        // Enlazamos las tarjetas
+        val cardEntreno = findViewById<CardView>(R.id.cardEntrenamiento)
+        val cardDieta = findViewById<CardView>(R.id.cardNutricion)
+        val cardIA = findViewById<CardView>(R.id.cardIA)
+        val cardHistorial = findViewById<CardView>(R.id.cardHistorial)
 
-        // 2. Conectamos el botón de ENTRENAMIENTO
-        btnEntrenamiento.setOnClickListener {
-            val intent = Intent(this, Entrenamiento::class.java)
-            startActivity(intent)
+        // Configuramos los clics
+        cardEntreno.setOnClickListener {
+            startActivity(Intent(this, Entrenamiento::class.java))
         }
 
-        // 3. Conectamos el botón de DIETA (Nutrición)
-        btnDieta.setOnClickListener {
-            val intent = Intent(this, Nutricion::class.java)
-            startActivity(intent)
+        cardDieta.setOnClickListener {
+            startActivity(Intent(this, Nutricion::class.java))
         }
 
-        // 4. Botón de consejos (lo dejaremos para más adelante)
-        btnIA.setOnClickListener {
-            // Aquí irá la lógica de la IA
+        cardIA.setOnClickListener {
+            startActivity(Intent(this, ConsejosIA::class.java))
+        }
+
+        cardHistorial.setOnClickListener {
+            startActivity(Intent(this, Historial::class.java))
         }
     }
 }

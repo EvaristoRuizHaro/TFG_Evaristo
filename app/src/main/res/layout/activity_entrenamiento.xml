@@ -5,68 +5,118 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="#F3F2F7">
+    android:background="#F8F9FA">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGISTRO DE ENTRENO"
+        android:text="Nuevo Registro de Fuerza"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#1A237E"
+        android:textColor="#1565C0"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="24dp"/>
 
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Ejercicio:"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"/>
+
+    <AutoCompleteTextView
         android:id="@+id/etEjercicio"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ejercicio (ej: Press Banca)"
-        android:inputType="textCapSentences"
-        android:layout_marginBottom="12dp"/>
+        android:layout_height="55dp"
+        android:hint="Empieza a escribir..."
+        android:completionThreshold="1"
+        android:padding="12dp"
+        android:background="@android:drawable/editbox_background"
+        android:layout_marginBottom="16dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="12dp">
+        android:baselineAligned="false">
 
-        <EditText
-            android:id="@+id/etKilos"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Kilos"
-            android:inputType="numberDecimal"
-            android:layout_marginEnd="5dp"/>
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Series:"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/etSeries"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="0"
+                android:inputType="number"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/etReps"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Reps"
-            android:inputType="number"
-            android:layout_marginStart="5dp"/>
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reps:"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/etReps"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="0"
+                android:inputType="number"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peso (kg):"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/etPeso"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="0.0"
+                android:inputType="numberDecimal"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnGuardarSerie"
+        android:id="@+id/btnGuardarEntreno"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="GUARDAR SERIE"
-        android:backgroundTint="#3F51B5"
-        android:layout_marginTop="30dp"
-        app:cornerRadius="8dp"/>
+        android:text="GUARDAR EN BASE DE DATOS"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#1565C0"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="12dp"/>
 
     <Button
-        android:id="@+id/btnVolverEntrenamiento"
+        android:id="@+id/btnVolverEntreno"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VOLVER AL MENÚ"
-        android:backgroundTint="#9E9E9E"
-        android:layout_marginTop="10dp"
-        app:cornerRadius="8dp"/>
+        android:layout_height="50dp"
+        android:text="CANCELAR Y VOLVER"
+        android:layout_marginTop="8dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="#757575"/>
 
 </LinearLayout>

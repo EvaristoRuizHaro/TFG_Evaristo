@@ -11,48 +11,38 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DÍA A IA"
-        android:textSize="32sp"
+        android:text="Crear Cuenta"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#1A237E"
-        android:layout_marginBottom="40dp"/>
+        android:textColor="#4CAF50"
+        android:layout_marginBottom="32dp"/>
 
     <EditText
-        android:id="@+id/etUsuario"
+        android:id="@+id/etNuevoUsuario"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:hint="Usuario"
+        android:hint="Elige nombre de usuario"
         android:inputType="text"
         android:padding="12dp"
         android:background="@android:drawable/editbox_background"
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/etNuevaPassword"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:hint="Contraseña"
+        android:hint="Elige contraseña"
         android:inputType="textPassword"
         android:padding="12dp"
         android:background="@android:drawable/editbox_background"
         android:layout_marginBottom="24dp"/>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegistrarGuardar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="ENTRAR"
-        android:textStyle="bold"
-        android:backgroundTint="#1A237E"
+        android:text="REGISTRARME"
+        android:backgroundTint="#4CAF50"
         app:cornerRadius="8dp"/>
-
-    <Button
-        android:id="@+id/btnIrARegistro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¿No tienes cuenta? Regístrate aquí"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:textColor="#3F51B5"
-        android:layout_marginTop="16dp"/>
 
 </LinearLayout>
