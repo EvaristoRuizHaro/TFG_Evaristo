@@ -81,6 +81,16 @@
         android:text="REGISTRAR COMIDA"
         android:backgroundTint="#2E7D32"
         android:textColor="#FFFFFF"
+        android:layout_marginBottom="12dp"
+        app:cornerRadius="12dp"/>
+
+    <Button
+        android:id="@+id/btnVolverNutricion"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="VOLVER AL MENÚ"
+        android:backgroundTint="#607D8B"
+        android:textColor="#FFFFFF"
         app:cornerRadius="12dp"/>
 
 </LinearLayout>

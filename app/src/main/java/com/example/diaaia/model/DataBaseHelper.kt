@@ -33,6 +33,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DiaAIA.db", 
         db?.execSQL("INSERT INTO usuarios (nombre, password) VALUES ('admin', '1234')")
     }
 
+    // LA FUNCIÓN DEBE ESTAR AQUÍ FUERA PARA QUE FUNCIONE EL CRUD
+    fun borrarAlimento(id: Int): Int {
+        val db = this.writableDatabase
+        return db.delete("nutricion", "id = ?", arrayOf(id.toString()))
+    }
+    // Borrar ejercicio de la tabla entrenamiento
+    fun borrarEjercicio(id: Int): Int {
+        val db = this.writableDatabase
+        return db.delete("entrenamiento", "id = ?", arrayOf(id.toString()))
+    }
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS usuarios")
         db?.execSQL("DROP TABLE IF EXISTS nutricion")

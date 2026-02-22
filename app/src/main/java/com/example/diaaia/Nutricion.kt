@@ -16,8 +16,12 @@ class Nutricion : AppCompatActivity() {
         val etAlimento = findViewById<AutoCompleteTextView>(R.id.etAlimento)
         val etCalorias = findViewById<EditText>(R.id.etCalorias)
         val btnGuardar = findViewById<Button>(R.id.btnGuardarComida)
+        val btnVolver = findViewById<Button>(R.id.btnVolverNutricion) // NUEVO BOTÓN
         val pbCalorias = findViewById<ProgressBar>(R.id.pbCalorias)
         val tvProgreso = findViewById<TextView>(R.id.tvProgresoCalorias)
+
+        // Configuración de la flecha de volver en la barra superior (opcional pero profesional)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // BASE DE DATOS DE 200 ALIMENTOS
         val alimentos = arrayOf(
@@ -55,6 +59,7 @@ class Nutricion : AppCompatActivity() {
 
         actualizarProgreso(dbHelper, pbCalorias, tvProgreso)
 
+        // Lógica para guardar comida
         btnGuardar.setOnClickListener {
             val nombre = etAlimento.text.toString()
             val cal = etCalorias.text.toString().toIntOrNull() ?: 0
@@ -74,10 +79,22 @@ class Nutricion : AppCompatActivity() {
                 Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Lógica para volver al menú
+        btnVolver.setOnClickListener {
+            finish() // Cierra esta actividad y regresa a la anterior
+        }
+    }
+
+    // Manejo de la flecha de la barra superior
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun actualizarProgreso(dbHelper: DatabaseHelper, pb: ProgressBar, tv: TextView) {
         val db = dbHelper.readableDatabase
+        // Consulta importante para que la IA tenga datos sincronizados por fecha
         val cursor = db.rawQuery("SELECT SUM(calorias) FROM nutricion WHERE fecha = CURRENT_DATE", null)
         var total = 0
         if (cursor.moveToFirst()) {

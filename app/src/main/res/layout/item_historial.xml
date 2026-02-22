@@ -4,45 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="8dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:id="@+id/tvIcono"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🍎"
-            android:textSize="24sp"
-            android:layout_marginEnd="16dp"/>
+        android:padding="16dp">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_toStartOf="@+id/btnBorrarItem">
 
             <TextView
-                android:id="@+id/tvTitulo"
+                android:id="@+id/tvNombreItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre del registro"
-                android:textSize="18sp"
+                android:text="Nombre"
                 android:textStyle="bold"
-                android:textColor="#212121"/>
+                android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/tvSubtitulo"
+                android:id="@+id/tvDetalleItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detalle (kcal o kg)"
-                android:textColor="#757575"/>
+                android:text="Detalles del registro"
+                android:textColor="#666666"/>
         </LinearLayout>
-    </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnBorrarItem"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#D32F2F" />
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
