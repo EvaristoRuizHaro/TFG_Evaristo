@@ -1,110 +1,177 @@
 package com.example.diaaia
 
-import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.diaaia.model.DatabaseHelper
+import com.example.diaaia.model.RegistroIngesta
+import com.example.diaaia.model.SessionManager
+import com.example.diaaia.repository.NutricionRepository
+import com.example.diaaia.repository.UsuarioRepository
 
+/**
+ * Pantalla de Nutrición. Cumple el requisito MVP "Registro Nutricional":
+ *  - Muestra los 4 macros del día (kcal, proteínas, carbohidratos, grasas) frente
+ *    al objetivo del usuario, con barras de progreso.
+ *  - Permite añadir ingestas seleccionando un alimento del catálogo y la cantidad
+ *    consumida en gramos.
+ *  - Lista las ingestas del día con desglose de macros escalado por gramaje.
+ *  - Accede al asistente IA nutricional (ConsejosIA).
+ */
 class Nutricion : AppCompatActivity() {
+
+    private lateinit var nutricionRepo: NutricionRepository
+    private lateinit var usuarioRepo: UsuarioRepository
+    private lateinit var session: SessionManager
+
+    private val ingestasHoy = mutableListOf<RegistroIngesta>()
+    private lateinit var adapter: IngestaAdapter
+
+    private var alimentoSeleccionadoId: Int = -1
+    private var alimentoSeleccionadoNombre: String = ""
+
+    // Objetivos del usuario
+    private var objKcal = 2500.0
+    private var objProt = 180.0
+    private var objCarbs = 280.0
+    private var objGrasas = 70.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nutricion)
 
+        session = SessionManager(this)
         val dbHelper = DatabaseHelper(this)
-        val etAlimento = findViewById<AutoCompleteTextView>(R.id.etAlimento)
-        val etCalorias = findViewById<EditText>(R.id.etCalorias)
-        val btnGuardar = findViewById<Button>(R.id.btnGuardarComida)
-        val btnVolver = findViewById<Button>(R.id.btnVolverNutricion) // NUEVO BOTÓN
-        val pbCalorias = findViewById<ProgressBar>(R.id.pbCalorias)
-        val tvProgreso = findViewById<TextView>(R.id.tvProgresoCalorias)
+        nutricionRepo = NutricionRepository(dbHelper)
+        usuarioRepo = UsuarioRepository(dbHelper)
 
-        // Configuración de la flecha de volver en la barra superior (opcional pero profesional)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val tvAlimento = findViewById<TextView>(R.id.tvAlimentoSeleccionado)
+        val etGramos = findViewById<EditText>(R.id.etGramos)
+        val btnElegirAlim = findViewById<Button>(R.id.btnElegirAlimento)
+        val btnGuardar = findViewById<Button>(R.id.btnGuardarIngesta)
+        val btnIA = findViewById<Button>(R.id.btnIrIANutricion)
+        val btnVolver = findViewById<Button>(R.id.btnVolverNutricion)
 
-        // BASE DE DATOS DE 200 ALIMENTOS
-        val alimentos = arrayOf(
-            // PROTEÍNAS Y CARNES (50)
-            "Pechuga de Pollo", "Muslo de Pollo", "Alitas de Pollo", "Pavo", "Ternera Magra", "Chuletón", "Entrecot", "Lomo de Cerdo", "Jamón Serrano", "Jamón Cocido",
-            "Bacon", "Salchichas", "Huevo Entero", "Clara de Huevo", "Cordero", "Conejo", "Codorniz", "Pato", "Hígado", "Riñones",
-            "Atún al natural", "Atún en aceite", "Salmón", "Merluza", "Bacalao", "Sardinas", "Boquerones", "Trucha", "Dorada", "Lubina",
-            "Gambas", "Langostinos", "Pulpo", "Sepia", "Calamares", "Mejillones", "Almejas", "Cangrejo", "Gulas", "Emperador",
-            "Tofu", "Seitán", "Tempeh", "Soja Texturizada", "Queso Batido 0%", "Requesón", "Proteína de Suero (Whey)", "Caseína", "Queso Fresco", "Burguer de Pavo",
-
-            // CARBOHIDRATOS Y CEREALES (50)
-            "Arroz Blanco", "Arroz Integral", "Arroz Vaporizado", "Arroz Basmati", "Pasta de Trigo", "Pasta Integral", "Espaguetis", "Macarrones", "Cuscús", "Quinoa",
-            "Avena en copos", "Harina de Avena", "Pan Integral", "Pan de Molde", "Pan de Centeno", "Biscotes", "Tortitas de Arroz", "Tortitas de Maíz", "Patata Cocida", "Patata Asada",
-            "Boniato", "Yuca", "Garbanzos", "Lentejas", "Alubias Blancas", "Alubias Pintas", "Guisantes", "Habas", "Maíz dulce", "Cereales de Maíz",
-            "Muesli", "Granola", "Salvado de Trigo", "Harina de Trigo", "Gnocchi", "Trigo Sarraceno", "Mijo", "Cebada", "Harina de Almendra", "Harina de Coco",
-            "Pasta de Lentejas", "Tallarines", "Lasaña (placas)", "Noodles", "Pan de Pita", "Bagel", "Croissant", "Magdalena", "Galletas María", "Galletas Integrales",
-
-            // FRUTAS Y VERDURAS (50)
-            "Manzana", "Pera", "Plátano", "Naranja", "Mandarina", "Limón", "Fresa", "Arándanos", "Frambuesas", "Moras",
-            "Uvas", "Kiwi", "Piña", "Mango", "Papaya", "Sandía", "Melón", "Melocotón", "Nectarina", "Albaricoque",
-            "Ciruela", "Cereza", "Higos", "Granada", "Aguacate", "Tomate", "Lechuga", "Espinacas", "Acelgas", "Brócoli",
-            "Coliflor", "Repollo", "Lombarda", "Escarola", "Canónigos", "Rúcula", "Pepino", "Calabacín", "Berenjena", "Pimiento Rojo",
-            "Pimiento Verde", "Cebolla", "Ajo", "Puerro", "Zanahoria", "Calabaza", "Espárragos", "Setas", "Champiñones", "Judías Verdes",
-
-            // LÁCTEOS, GRASAS Y OTROS (50)
-            "Leche Desnatada", "Leche Semidesnatada", "Leche Entera", "Leche de Almendras", "Leche de Soja", "Leche de Avena", "Leche de Arroz", "Yogur Natural", "Yogur Griego", "Yogur de Proteínas",
-            "Kéfir", "Queso Cheddar", "Queso Mozzarella", "Queso Parmesano", "Queso de Cabra", "Mantequilla", "Margarina", "Aceite de Oliva", "Aceite de Coco", "Manteca",
-            "Nueces", "Almendras", "Avellanas", "Cacahuetes", "Pistachos", "Anacardos", "Semillas de Chía", "Semillas de Lino", "Semillas de Girasol", "Semillas de Calabaza",
-            "Mantequilla de Cacahuete", "Crema de Almendras", "Hummus", "Guacamole", "Mayonesa", "Kétchup", "Mostaza", "Salsa de Soja", "Miel", "Mermelada",
-            "Chocolate Negro (>85%)", "Cacao en Polvo", "Café", "Té Verde", "Infusión", "Bebida Energética", "Zumo de Naranja", "Vino Tinto", "Cerveza", "Aceitunas"
-        )
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, alimentos)
-        etAlimento.setAdapter(adapter)
-
-        actualizarProgreso(dbHelper, pbCalorias, tvProgreso)
-
-        // Lógica para guardar comida
-        btnGuardar.setOnClickListener {
-            val nombre = etAlimento.text.toString()
-            val cal = etCalorias.text.toString().toIntOrNull() ?: 0
-
-            if (nombre.isNotEmpty() && cal > 0) {
-                val db = dbHelper.writableDatabase
-                val values = ContentValues().apply {
-                    put("alimento", nombre)
-                    put("calorias", cal)
+        val rv = findViewById<RecyclerView>(R.id.rvIngestasHoy)
+        rv.layoutManager = LinearLayoutManager(this)
+        adapter = IngestaAdapter(ingestasHoy) { ingesta ->
+            AlertDialog.Builder(this)
+                .setTitle("Borrar ingesta")
+                .setMessage("¿Borrar ${ingesta.alimentoNombre} (${"%.0f".format(ingesta.cantidadGramos)} g)?")
+                .setPositiveButton("Borrar") { _, _ ->
+                    if (nutricionRepo.borrarIngesta(ingesta.id)) refrescar()
                 }
-                db.insert("nutricion", null, values)
-                Toast.makeText(this, "Comida registrada", Toast.LENGTH_SHORT).show()
-                actualizarProgreso(dbHelper, pbCalorias, tvProgreso)
-                etAlimento.text.clear()
-                etCalorias.text.clear()
+                .setNegativeButton("Cancelar", null)
+                .show()
+        }
+        rv.adapter = adapter
+
+        btnElegirAlim.setOnClickListener {
+            startActivityForResult(
+                Intent(this, SelectorAlimentos::class.java),
+                REQ_SELECTOR_ALIM
+            )
+        }
+
+        btnGuardar.setOnClickListener {
+            if (alimentoSeleccionadoId <= 0) {
+                Toast.makeText(this, "Elige un alimento primero", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val gramos = etGramos.text.toString().toDoubleOrNull()
+            if (gramos == null || gramos <= 0) {
+                etGramos.error = "Introduce una cantidad válida (g)"
+                return@setOnClickListener
+            }
+            val id = nutricionRepo.registrarIngesta(
+                usuarioId = session.usuarioId(),
+                alimentoId = alimentoSeleccionadoId,
+                cantidadGramos = gramos
+            )
+            if (id > 0) {
+                Toast.makeText(this, "Ingesta guardada", Toast.LENGTH_SHORT).show()
+                etGramos.setText("")
+                tvAlimento.text = "Ningún alimento seleccionado"
+                alimentoSeleccionadoId = -1
+                alimentoSeleccionadoNombre = ""
+                refrescar()
             } else {
-                Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error guardando ingesta", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Lógica para volver al menú
-        btnVolver.setOnClickListener {
-            finish() // Cierra esta actividad y regresa a la anterior
+        btnIA.setOnClickListener {
+            startActivity(Intent(this, ConsejosIA::class.java))
+        }
+
+        btnVolver.setOnClickListener { finish() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refrescar()
+    }
+
+    @Deprecated("Suficiente con startActivityForResult para el alcance del TFG")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQ_SELECTOR_ALIM && resultCode == RESULT_OK && data != null) {
+            alimentoSeleccionadoId = data.getIntExtra("alimentoId", -1)
+            alimentoSeleccionadoNombre = data.getStringExtra("alimentoNombre") ?: ""
+            findViewById<TextView>(R.id.tvAlimentoSeleccionado).text =
+                if (alimentoSeleccionadoId > 0) "🍽 $alimentoSeleccionadoNombre"
+                else "Ningún alimento seleccionado"
         }
     }
 
-    // Manejo de la flecha de la barra superior
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
+    private fun refrescar() {
+        // Cargar objetivos actualizados del perfil
+        val u = usuarioRepo.buscarPorId(session.usuarioId())
+        if (u != null) {
+            objKcal = u.caloriasObjetivo.coerceAtLeast(1.0)
+            objProt = u.proteinasObjetivo.coerceAtLeast(1.0)
+            objCarbs = u.carbsObjetivo.coerceAtLeast(1.0)
+            objGrasas = u.grasasObjetivo.coerceAtLeast(1.0)
+        }
+
+        // Totales de hoy
+        val totales = nutricionRepo.totalesHoy(session.usuarioId())
+
+        val pbCal = findViewById<ProgressBar>(R.id.pbCalorias)
+        val pbProt = findViewById<ProgressBar>(R.id.pbProteinas)
+        val pbCarbs = findViewById<ProgressBar>(R.id.pbCarbs)
+        val pbGrasas = findViewById<ProgressBar>(R.id.pbGrasas)
+
+        pintar(pbCal, findViewById(R.id.tvProgresoCalorias), "kcal", totales.calorias, objKcal)
+        pintar(pbProt, findViewById(R.id.tvProgresoProteinas), "g P", totales.proteinas, objProt)
+        pintar(pbCarbs, findViewById(R.id.tvProgresoCarbs), "g C", totales.carbs, objCarbs)
+        pintar(pbGrasas, findViewById(R.id.tvProgresoGrasas), "g G", totales.grasas, objGrasas)
+
+        // Lista de ingestas
+        ingestasHoy.clear()
+        ingestasHoy.addAll(nutricionRepo.ingestasDeHoy(session.usuarioId()))
+        adapter.notifyDataSetChanged()
+
+        val tvVacio = findViewById<TextView>(R.id.tvVacioIngestas)
+        tvVacio.visibility = if (ingestasHoy.isEmpty()) View.VISIBLE else View.GONE
     }
 
-    private fun actualizarProgreso(dbHelper: DatabaseHelper, pb: ProgressBar, tv: TextView) {
-        val db = dbHelper.readableDatabase
-        // Consulta importante para que la IA tenga datos sincronizados por fecha
-        val cursor = db.rawQuery("SELECT SUM(calorias) FROM nutricion WHERE fecha = CURRENT_DATE", null)
-        var total = 0
-        if (cursor.moveToFirst()) {
-            total = cursor.getInt(0)
-        }
-        cursor.close()
+    private fun pintar(pb: ProgressBar, tv: TextView, unidad: String, actual: Double, objetivo: Double) {
+        pb.max = objetivo.toInt().coerceAtLeast(1)
+        pb.progress = actual.toInt().coerceIn(0, pb.max)
+        tv.text = "${"%.0f".format(actual)} / ${"%.0f".format(objetivo)} $unidad"
+    }
 
-        val objetivo = 2500
-        pb.max = objetivo
-        pb.progress = total
-        tv.text = "Hoy: $total / $objetivo kcal"
+    companion object {
+        private const val REQ_SELECTOR_ALIM = 301
     }
 }

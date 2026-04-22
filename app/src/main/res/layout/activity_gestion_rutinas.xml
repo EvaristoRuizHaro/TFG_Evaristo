@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F4F7F9"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📋 Mis Rutinas"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#1A237E"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvVacioRutinas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aún no has creado ninguna rutina.\nPulsa «Nueva rutina» para empezar."
+        android:gravity="center"
+        android:textColor="#757575"
+        android:textSize="14sp"
+        android:padding="24dp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRutinas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnNuevaRutina"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="+ NUEVA RUTINA"
+        android:backgroundTint="#1565C0"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="8dp"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/btnVolverRutinas"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Volver"
+        android:backgroundTint="#757575"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="8dp" />
+
+</LinearLayout>

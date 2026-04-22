@@ -4,93 +4,265 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="#F1F8E9">
+    android:background="#F4F7F9">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Control de Nutrición"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#2E7D32"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"/>
-
-    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp">
+        android:text="🍎 Nutrición"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="#2E7D32"
+        android:padding="16dp"
+        android:gravity="center" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <!-- PROGRESO DEL DÍA -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resumen del día"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calorías"
+                        android:textSize="13sp"
+                        android:textColor="#424242" />
+                    <ProgressBar
+                        android:id="@+id/pbCalorias"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:progressTint="#E53935"
+                        android:max="2500"
+                        android:progress="0" />
+                    <TextView
+                        android:id="@+id/tvProgresoCalorias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 / 2500 kcal"
+                        android:textSize="12sp"
+                        android:textColor="#616161"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proteínas"
+                        android:textSize="13sp"
+                        android:textColor="#424242" />
+                    <ProgressBar
+                        android:id="@+id/pbProteinas"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:progressTint="#1E88E5"
+                        android:max="180"
+                        android:progress="0" />
+                    <TextView
+                        android:id="@+id/tvProgresoProteinas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 / 180 g P"
+                        android:textSize="12sp"
+                        android:textColor="#616161"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carbohidratos"
+                        android:textSize="13sp"
+                        android:textColor="#424242" />
+                    <ProgressBar
+                        android:id="@+id/pbCarbs"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:progressTint="#FB8C00"
+                        android:max="280"
+                        android:progress="0" />
+                    <TextView
+                        android:id="@+id/tvProgresoCarbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 / 280 g C"
+                        android:textSize="12sp"
+                        android:textColor="#616161"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Grasas"
+                        android:textSize="13sp"
+                        android:textColor="#424242" />
+                    <ProgressBar
+                        android:id="@+id/pbGrasas"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:progressTint="#8E24AA"
+                        android:max="70"
+                        android:progress="0" />
+                    <TextView
+                        android:id="@+id/tvProgresoGrasas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 / 70 g G"
+                        android:textSize="12sp"
+                        android:textColor="#616161" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- FORMULARIO DE INGESTA -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Registrar ingesta"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvAlimentoSeleccionado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ningún alimento seleccionado"
+                        android:textSize="14sp"
+                        android:textColor="#424242"
+                        android:layout_marginBottom="6dp" />
+
+                    <Button
+                        android:id="@+id/btnElegirAlimento"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:text="🔎 ELEGIR ALIMENTO"
+                        android:backgroundTint="#66BB6A"
+                        android:textColor="#FFFFFF"
+                        app:cornerRadius="8dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <EditText
+                        android:id="@+id/etGramos"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="Cantidad (gramos)"
+                        android:inputType="numberDecimal"
+                        android:background="@android:drawable/editbox_background"
+                        android:padding="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <Button
+                        android:id="@+id/btnGuardarIngesta"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="GUARDAR INGESTA"
+                        android:backgroundTint="#2E7D32"
+                        android:textColor="#FFFFFF"
+                        app:cornerRadius="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- LISTA DE INGESTAS HOY -->
             <TextView
-                android:id="@+id/tvProgresoCalorias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hoy: 0 / 2500 kcal"
+                android:text="Ingestas de hoy"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
-            <ProgressBar
-                android:id="@+id/pbCalorias"
-                style="?android:attr/progressBarStyleHorizontal"
+                android:textColor="#1A237E"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvVacioIngestas"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:progressTint="#4CAF50"/>
+                android:layout_height="wrap_content"
+                android:text="Aún no has registrado nada hoy. Mantén pulsado sobre una ingesta para borrarla."
+                android:gravity="center"
+                android:textColor="#9E9E9E"
+                android:padding="12dp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvIngestasHoy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Alimento:"
-        android:textStyle="bold"/>
-    <AutoCompleteTextView
-        android:id="@+id/etAlimento"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:hint="Escribe para buscar..."
-        android:completionThreshold="1"
-        android:background="@android:drawable/editbox_background"
+        android:orientation="horizontal"
         android:padding="12dp"
-        android:layout_marginBottom="16dp"/>
+        android:background="#FFFFFF">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calorías totales (kcal):"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/etCalorias"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:hint="0"
-        android:inputType="number"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        android:layout_marginBottom="24dp"/>
+        <Button
+            android:id="@+id/btnIrIANutricion"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="🤖 IA"
+            android:backgroundTint="#7B1FA2"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="6dp" />
 
-    <Button
-        android:id="@+id/btnGuardarComida"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="REGISTRAR COMIDA"
-        android:backgroundTint="#2E7D32"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="12dp"
-        app:cornerRadius="12dp"/>
-
-    <Button
-        android:id="@+id/btnVolverNutricion"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="VOLVER AL MENÚ"
-        android:backgroundTint="#607D8B"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="12dp"/>
-
+        <Button
+            android:id="@+id/btnVolverNutricion"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="Volver"
+            android:backgroundTint="#757575"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
 </LinearLayout>

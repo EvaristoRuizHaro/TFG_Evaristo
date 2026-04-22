@@ -31,11 +31,19 @@
         android:id="@+id/etNuevaPassword"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:hint="Elige contraseña"
+        android:hint="Elige contraseña (mín. 4 caracteres)"
         android:inputType="textPassword"
         android:padding="12dp"
         android:background="@android:drawable/editbox_background"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="16dp"/>
+
+    <CheckBox
+        android:id="@+id/cbEntrenador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Soy entrenador (podré gestionar clientes)"
+        android:textColor="#424242"
+        android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/btnRegistrarGuardar"

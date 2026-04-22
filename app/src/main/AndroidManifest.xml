@@ -20,19 +20,61 @@
             android:name=".Registro"
             android:exported="false" />
         <activity
-            android:name=".Historial"
+            android:name=".MenuPrincipal"
+            android:exported="false" />
+
+        <!-- Rutinas -->
+        <activity
+            android:name=".GestionRutinas"
             android:exported="false" />
         <activity
-            android:name=".ConsejosIA"
+            android:name=".CrearEditarRutina"
+            android:exported="false" />
+        <activity
+            android:name=".SelectorEjercicios"
+            android:exported="false" />
+
+        <!-- Entrenamiento -->
+        <activity
+            android:name=".SeleccionRutina"
+            android:exported="false" />
+        <activity
+            android:name=".SesionEntrenamiento"
             android:exported="false" />
         <activity
             android:name=".Entrenamiento"
             android:exported="false" />
+
+        <!-- Nutricion -->
         <activity
             android:name=".Nutricion"
             android:exported="false" />
         <activity
-            android:name=".MenuPrincipal"
+            android:name=".SelectorAlimentos"
+            android:exported="false" />
+
+        <!-- IA e historial -->
+        <activity
+            android:name=".ConsejosIA"
+            android:exported="false" />
+        <activity
+            android:name=".Historial"
+            android:exported="false" />
+
+        <!-- Perfil -->
+        <activity
+            android:name=".Perfil"
+            android:exported="false" />
+
+        <!-- Requisitos deseables -->
+        <activity
+            android:name=".Estadisticas"
+            android:exported="false" />
+        <activity
+            android:name=".ExportarPDF"
+            android:exported="false" />
+        <activity
+            android:name=".MisClientes"
             android:exported="false" />
 
         <activity
@@ -43,6 +85,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>

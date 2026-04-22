@@ -7,47 +7,61 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diaaia.model.DatabaseHelper
+import com.example.diaaia.model.SessionManager
+import com.example.diaaia.repository.UsuarioRepository
 
+/**
+ * Pantalla de Login.
+ *
+ * Usa [UsuarioRepository] para autenticar (con contraseña hasheada) y [SessionManager]
+ * para persistir la sesión entre reinicios de la app.
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sessionManager = SessionManager(this)
+
+        // Autologin: si ya hay sesión guardada, saltamos directo al menú
+        if (sessionManager.estaLogueado()) {
+            startActivity(Intent(this, MenuPrincipal::class.java))
+            finish()
+            return
+        }
+
         val dbHelper = DatabaseHelper(this)
+        val usuarioRepo = UsuarioRepository(dbHelper)
 
         val etUsuario = findViewById<EditText>(R.id.etUsuario)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnIrRegistro = findViewById<Button>(R.id.btnIrARegistro)
 
-        // Botón para INICIAR SESIÓN
         btnLogin.setOnClickListener {
-            val userText = etUsuario.text.toString()
-            val passText = etPassword.text.toString()
+            val user = etUsuario.text.toString().trim()
+            val pass = etPassword.text.toString()
 
-            val db = dbHelper.readableDatabase
-            // Consulta SQL parametrizada para evitar inyecciones
-            val cursor = db.rawQuery(
-                "SELECT * FROM usuarios WHERE nombre = ? AND password = ?",
-                arrayOf(userText, passText)
-            )
+            if (user.isEmpty() || pass.isEmpty()) {
+                etUsuario.error = if (user.isEmpty()) "Introduce tu usuario" else null
+                etPassword.error = if (pass.isEmpty()) "Introduce tu contraseña" else null
+                return@setOnClickListener
+            }
 
-            if (cursor.moveToFirst()) {
-                Toast.makeText(this, "¡Bienvenido, $userText!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MenuPrincipal::class.java)
-                startActivity(intent)
-                finish() // Evita volver al login con el botón atrás
+            val usuario = usuarioRepo.autenticar(user, pass)
+            if (usuario != null) {
+                sessionManager.guardarSesion(usuario.id, usuario.nombre, usuario.rol)
+                Toast.makeText(this, "¡Bienvenido, ${usuario.nombre}!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MenuPrincipal::class.java))
+                finish()
             } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
-            cursor.close()
         }
 
-        // Botón para ir a la pantalla de REGISTRO
         btnIrRegistro.setOnClickListener {
-            val intent = Intent(this, Registro::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Registro::class.java))
         }
     }
 }

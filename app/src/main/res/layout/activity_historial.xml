@@ -16,6 +16,16 @@
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"/>
 
+    <TextView
+        android:id="@+id/tvVacioHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aún no hay actividad registrada."
+        android:gravity="center"
+        android:textColor="#9E9E9E"
+        android:padding="16dp"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistorial"
         android:layout_width="match_parent"

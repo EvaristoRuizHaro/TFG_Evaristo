@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F7F9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="👤 Mi Perfil"
+            android:textColor="#1A237E"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peso corporal (kg)"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etPesoCorporal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="75.0"
+            android:inputType="numberDecimal"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calorías objetivo (kcal/día)"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etCaloriasObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="2500"
+            android:inputType="number"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proteínas (g/día)"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etProteinasObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="180"
+            android:inputType="number"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carbohidratos (g/día)"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etCarbsObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="280"
+            android:inputType="number"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grasas (g/día)"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etGrasasObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="70"
+            android:inputType="number"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meta"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spMeta"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnGuardarPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="GUARDAR"
+            android:backgroundTint="#1565C0"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="8dp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnVolverPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Volver"
+            android:backgroundTint="#757575"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="8dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,13 +1,20 @@
 package com.example.diaaia
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diaaia.model.DatabaseHelper
+import com.example.diaaia.repository.UsuarioRepository
 
+/**
+ * Pantalla de Registro de nuevo usuario.
+ *
+ * Permite crear cuentas con rol "cliente" (por defecto) o "entrenador" (marcando
+ * el checkbox). La contraseña se almacena hasheada por [UsuarioRepository].
+ */
 class Registro : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,31 +22,38 @@ class Registro : AppCompatActivity() {
         setContentView(R.layout.activity_registro)
 
         val dbHelper = DatabaseHelper(this)
+        val usuarioRepo = UsuarioRepository(dbHelper)
+
         val etUser = findViewById<EditText>(R.id.etNuevoUsuario)
         val etPass = findViewById<EditText>(R.id.etNuevaPassword)
+        val cbEntrenador = findViewById<CheckBox>(R.id.cbEntrenador)
         val btnGuardar = findViewById<Button>(R.id.btnRegistrarGuardar)
 
         btnGuardar.setOnClickListener {
-            val user = etUser.text.toString()
+            val user = etUser.text.toString().trim()
             val pass = etPass.text.toString()
 
-            if (user.isNotEmpty() && pass.isNotEmpty()) {
-                val db = dbHelper.writableDatabase
-                val values = ContentValues().apply {
-                    put("nombre", user)
-                    put("password", pass)
-                }
+            if (user.length < 3) {
+                etUser.error = "Mínimo 3 caracteres"
+                return@setOnClickListener
+            }
+            if (pass.length < 4) {
+                etPass.error = "Mínimo 4 caracteres"
+                return@setOnClickListener
+            }
 
-                val resultado = db.insert("usuarios", null, values)
+            val rol = if (cbEntrenador.isChecked) "entrenador" else "cliente"
+            val id = usuarioRepo.registrar(user, pass, rol)
 
-                if (resultado != -1L) {
-                    Toast.makeText(this, "Usuario creado con éxito", Toast.LENGTH_SHORT).show()
-                    finish() // Vuelve a la pantalla de Login
-                } else {
-                    Toast.makeText(this, "Error al registrar", Toast.LENGTH_SHORT).show()
-                }
+            if (id > 0) {
+                Toast.makeText(this, "Usuario creado con éxito. Inicia sesión.", Toast.LENGTH_SHORT).show()
+                finish()
             } else {
-                Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Ese nombre de usuario ya existe o hubo un error al registrar.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
