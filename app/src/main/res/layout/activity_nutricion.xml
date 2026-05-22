@@ -4,18 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F4F7F9">
+    android:background="@color/colorBackground">
 
-    <TextView
+    <!-- ── Header ── -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="🍎 Nutrición"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:background="#2E7D32"
-        android:padding="16dp"
-        android:gravity="center" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_restaurant"
+            app:tint="@color/colorNutricion"
+            android:layout_marginEnd="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nutrición"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnSurface"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,145 +47,141 @@
             android:padding="16dp">
 
             <!-- PROGRESO DEL DÍA -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="3dp"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorNutricionLight"
+                app:strokeWidth="1dp"
                 android:layout_marginBottom="14dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp"
-                    android:background="#FFFFFF">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Resumen del día"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="#2E7D32"
-                        android:layout_marginBottom="8dp" />
+                        android:textColor="@color/colorNutricion"
+                        android:layout_marginBottom="14dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Calorías"
-                        android:textSize="13sp"
-                        android:textColor="#424242" />
-                    <ProgressBar
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Calorías" android:textSize="12sp" android:textColor="@color/colorTextSecondary" android:layout_marginBottom="4dp"/>
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/pbCalorias"
-                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:progressTint="#E53935"
+                        android:layout_height="wrap_content"
+                        app:trackColor="@color/colorDivider"
+                        app:indicatorColor="#EF6363"
+                        app:trackCornerRadius="4dp"
                         android:max="2500"
-                        android:progress="0" />
+                        android:progress="0"/>
                     <TextView
                         android:id="@+id/tvProgresoCalorias"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 / 2500 kcal"
                         android:textSize="12sp"
-                        android:textColor="#616161"
-                        android:layout_marginBottom="8dp" />
+                        android:textColor="@color/colorTextSecondary"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="12dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Proteínas"
-                        android:textSize="13sp"
-                        android:textColor="#424242" />
-                    <ProgressBar
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Proteínas" android:textSize="12sp" android:textColor="@color/colorTextSecondary" android:layout_marginBottom="4dp"/>
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/pbProteinas"
-                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:progressTint="#1E88E5"
+                        android:layout_height="wrap_content"
+                        app:trackColor="@color/colorDivider"
+                        app:indicatorColor="@color/colorEntrenamiento"
+                        app:trackCornerRadius="4dp"
                         android:max="180"
-                        android:progress="0" />
+                        android:progress="0"/>
                     <TextView
                         android:id="@+id/tvProgresoProteinas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 / 180 g P"
                         android:textSize="12sp"
-                        android:textColor="#616161"
-                        android:layout_marginBottom="8dp" />
+                        android:textColor="@color/colorTextSecondary"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="12dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Carbohidratos"
-                        android:textSize="13sp"
-                        android:textColor="#424242" />
-                    <ProgressBar
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Carbohidratos" android:textSize="12sp" android:textColor="@color/colorTextSecondary" android:layout_marginBottom="4dp"/>
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/pbCarbs"
-                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:progressTint="#FB8C00"
+                        android:layout_height="wrap_content"
+                        app:trackColor="@color/colorDivider"
+                        app:indicatorColor="@color/colorHistorial"
+                        app:trackCornerRadius="4dp"
                         android:max="280"
-                        android:progress="0" />
+                        android:progress="0"/>
                     <TextView
                         android:id="@+id/tvProgresoCarbs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 / 280 g C"
                         android:textSize="12sp"
-                        android:textColor="#616161"
-                        android:layout_marginBottom="8dp" />
+                        android:textColor="@color/colorTextSecondary"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="12dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Grasas"
-                        android:textSize="13sp"
-                        android:textColor="#424242" />
-                    <ProgressBar
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Grasas" android:textSize="12sp" android:textColor="@color/colorTextSecondary" android:layout_marginBottom="4dp"/>
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:id="@+id/pbGrasas"
-                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:progressTint="#8E24AA"
+                        android:layout_height="wrap_content"
+                        app:trackColor="@color/colorDivider"
+                        app:indicatorColor="@color/colorIA"
+                        app:trackCornerRadius="4dp"
                         android:max="70"
-                        android:progress="0" />
+                        android:progress="0"/>
                     <TextView
                         android:id="@+id/tvProgresoGrasas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 / 70 g G"
                         android:textSize="12sp"
-                        android:textColor="#616161" />
+                        android:textColor="@color/colorTextSecondary"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- FORMULARIO DE INGESTA -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="3dp"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorNutricionLight"
+                app:strokeWidth="1dp"
                 android:layout_marginBottom="14dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp"
-                    android:background="#FFFFFF">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Registrar ingesta"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="#2E7D32"
-                        android:layout_marginBottom="8dp" />
+                        android:textColor="@color/colorNutricion"
+                        android:layout_marginBottom="12dp"/>
 
                     <TextView
                         android:id="@+id/tvAlimentoSeleccionado"
@@ -175,65 +189,73 @@
                         android:layout_height="wrap_content"
                         android:text="Ningún alimento seleccionado"
                         android:textSize="14sp"
-                        android:textColor="#424242"
-                        android:layout_marginBottom="6dp" />
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:layout_marginBottom="10dp"/>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnElegirAlimento"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:text="🔎 ELEGIR ALIMENTO"
-                        android:backgroundTint="#66BB6A"
-                        android:textColor="#FFFFFF"
-                        app:cornerRadius="8dp"
-                        android:layout_marginBottom="10dp" />
+                        android:layout_height="46dp"
+                        android:text="ELEGIR ALIMENTO"
+                        app:backgroundTint="@color/colorNutricion"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_search"
+                        app:iconSize="18dp"
+                        android:layout_marginBottom="12dp"/>
 
-                    <EditText
-                        android:id="@+id/etGramos"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:hint="Cantidad (gramos)"
-                        android:inputType="numberDecimal"
-                        android:background="@android:drawable/editbox_background"
-                        android:padding="10dp"
-                        android:layout_marginBottom="10dp" />
+                        style="@style/Widget.DiaAIA.TextInputLayout"
+                        android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etGramos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/colorOnSurface"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnGuardarIngesta"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:text="GUARDAR INGESTA"
-                        android:backgroundTint="#2E7D32"
-                        android:textColor="#FFFFFF"
-                        app:cornerRadius="8dp" />
+                        app:backgroundTint="@color/colorNutricionLight"
+                        app:strokeColor="@color/colorNutricion"
+                        app:strokeWidth="1dp"
+                        android:textColor="@color/colorNutricion"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_check"
+                        app:iconSize="18dp"/>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- LISTA DE INGESTAS HOY -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingestas de hoy"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:textColor="#1A237E"
-                android:layout_marginBottom="6dp" />
+                android:textColor="@color/colorOnSurface"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/tvVacioIngestas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Aún no has registrado nada hoy. Mantén pulsado sobre una ingesta para borrarla."
+                android:text="Aún no has registrado nada hoy."
                 android:gravity="center"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/colorTextHint"
                 android:padding="12dp"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvIngestasHoy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp" />
+                android:minHeight="60dp"/>
         </LinearLayout>
     </ScrollView>
 
@@ -242,27 +264,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:background="#FFFFFF">
+        android:background="@color/colorSurface">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnIrIANutricion"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="🤖 IA"
-            android:backgroundTint="#7B1FA2"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp"
-            android:layout_marginEnd="6dp" />
+            android:text="IA"
+            app:backgroundTint="@color/colorIALight"
+            app:strokeColor="@color/colorIA"
+            app:strokeWidth="1dp"
+            android:textColor="@color/colorIA"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_auto_awesome"
+            app:iconSize="18dp"
+            android:layout_marginEnd="6dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVolverNutricion"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:text="Volver"
-            android:backgroundTint="#757575"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp" />
+            app:backgroundTint="@color/colorSurfaceElevated"
+            android:textColor="@color/colorTextSecondary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconSize="18dp"/>
     </LinearLayout>
 </LinearLayout>

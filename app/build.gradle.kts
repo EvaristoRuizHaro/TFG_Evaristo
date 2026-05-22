@@ -43,12 +43,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // LA IA DE GEMINI
-    implementation(libs.google.generativeai)
-
-    // Necesario para que la IA funcione en segundo plano
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-
     // Componentes visuales
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")

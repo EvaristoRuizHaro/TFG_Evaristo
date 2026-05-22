@@ -1,46 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp">
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/colorSurfaceVariant"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/colorHistorialLight"
+    app:strokeWidth="1dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorHistorial"
+            android:minHeight="60dp"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_toStartOf="@+id/btnBorrarItem">
+            android:padding="14dp">
 
             <TextView
                 android:id="@+id/tvNombreItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre"
+                android:text="Entrenamiento"
+                android:textSize="14sp"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textColor="@color/colorHistorial"/>
 
             <TextView
                 android:id="@+id/tvDetalleItem"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Detalles del registro"
-                android:textColor="#666666"/>
+                android:text="Detalle"
+                android:textSize="12sp"
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:layout_marginTop="4dp"/>
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/btnBorrarItem"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_delete"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_delete"
-            app:tint="#D32F2F" />
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            app:tint="@color/colorError"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Eliminar"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

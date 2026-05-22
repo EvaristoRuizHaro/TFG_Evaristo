@@ -1,149 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F9">
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
 
+    <!-- ── Header ── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_person"
+            app:tint="@color/colorPrimaryLight"
+            android:layout_marginEnd="12dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="👤 Mi Perfil"
-            android:textColor="#1A237E"
-            android:textSize="26sp"
+            android:layout_weight="1"
+            android:text="Mi Perfil"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Peso corporal (kg)"
-            android:textColor="#424242"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/etPesoCorporal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="75.0"
-            android:inputType="numberDecimal"
-            android:background="@android:drawable/editbox_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calorías objetivo (kcal/día)"
-            android:textColor="#424242"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/etCaloriasObjetivo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="2500"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Proteínas (g/día)"
-            android:textColor="#424242"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/etProteinasObjetivo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="180"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Carbohidratos (g/día)"
-            android:textColor="#424242"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/etCarbsObjetivo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="280"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grasas (g/día)"
-            android:textColor="#424242"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/etGrasasObjetivo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="70"
-            android:inputType="number"
-            android:background="@android:drawable/editbox_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meta"
-            android:textColor="#424242"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp" />
-
-        <Spinner
-            android:id="@+id/spMeta"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="24dp" />
-
-        <Button
-            android:id="@+id/btnGuardarPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:text="GUARDAR"
-            android:backgroundTint="#1565C0"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btnVolverPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Volver"
-            android:backgroundTint="#757575"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp" />
-
+            android:textColor="@color/colorOnSurface"/>
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Datos corporales -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorPrimaryContainer"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Datos corporales"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryLight"
+                        android:layout_marginBottom="16dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Peso corporal (kg)"
+                        style="@style/Widget.DiaAIA.TextInputLayout"
+                        android:layout_marginBottom="14dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPesoCorporal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/colorOnSurface"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Meta"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="4dp"/>
+
+                    <Spinner
+                        android:id="@+id/spMeta"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_field"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Objetivos nutricionales -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorNutricionLight"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Objetivos nutricionales"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorNutricion"
+                        android:layout_marginBottom="16dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Calorías objetivo (kcal/día)"
+                        style="@style/Widget.DiaAIA.TextInputLayout"
+                        android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCaloriasObjetivo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/colorOnSurface"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Proteínas (g/día)"
+                        style="@style/Widget.DiaAIA.TextInputLayout"
+                        android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etProteinasObjetivo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/colorOnSurface"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Carbohidratos (g/día)"
+                        style="@style/Widget.DiaAIA.TextInputLayout"
+                        android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCarbsObjetivo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/colorOnSurface"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Grasas (g/día)"
+                        style="@style/Widget.DiaAIA.TextInputLayout">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etGrasasObjetivo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/colorOnSurface"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGuardarPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="GUARDAR CAMBIOS"
+                android:textStyle="bold"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_check"
+                app:iconSize="20dp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVolverPerfil"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Volver"
+                android:textColor="@color/colorTextSecondary"
+                app:strokeColor="@color/colorOutline"
+                app:cornerRadius="12dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

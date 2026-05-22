@@ -4,19 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F4F7F9">
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:id="@+id/tvTituloSesion"
+    <!-- ── Header ── -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="🏋️ Sesión"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:background="#1565C0"
-        android:padding="16dp"
-        android:gravity="center" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_fitness_center"
+            app:tint="@color/colorEntrenamiento"
+            android:layout_marginEnd="12dp"/>
+
+        <TextView
+            android:id="@+id/tvTituloSesion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sesión"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnSurface"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +46,7 @@
             android:id="@+id/llEjerciciosSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"/>
     </ScrollView>
 
     <LinearLayout
@@ -36,35 +54,43 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="12dp"
-        android:background="#FFFFFF">
+        android:background="@color/colorSurface">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAnadirEjSesion"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:text="+ AÑADIR EJERCICIO"
-            android:backgroundTint="#2E7D32"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="8dp" />
+            android:text="AÑADIR EJERCICIO"
+            app:backgroundTint="@color/colorNutricionLight"
+            app:strokeColor="@color/colorNutricion"
+            app:strokeWidth="1dp"
+            android:textColor="@color/colorNutricion"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_add"
+            app:iconSize="18dp"
+            android:layout_marginBottom="8dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFinalizarSesion"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="✅ FINALIZAR SESIÓN"
-            android:backgroundTint="#1565C0"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="8dp" />
+            android:text="FINALIZAR SESIÓN"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorEntrenamiento"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_check"
+            app:iconSize="20dp"
+            android:layout_marginBottom="8dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelarSesion"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:text="Cancelar sesión"
-            android:backgroundTint="#B00020"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp" />
+            app:backgroundTint="@color/colorErrorContainer"
+            android:textColor="@color/colorError"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_close"
+            app:iconSize="16dp"/>
     </LinearLayout>
 </LinearLayout>

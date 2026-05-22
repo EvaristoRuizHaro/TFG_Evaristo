@@ -19,7 +19,7 @@ import android.database.sqlite.SQLiteOpenHelper
  *
  * Versión 10: esquema completo TFG.
  */
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DiaAIA.db", null, 10) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DiaAIA.db", null, 11) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         if (db == null) return
@@ -45,6 +45,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DiaAIA.db", 
         poblarEjercicios(db)
         poblarAlimentos(db)
         poblarUsuarioAdminInicial(db)
+        poblarDatosDemoCompleto(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -377,6 +378,169 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DiaAIA.db", 
             put("rol", "cliente")
         }
         db.insert("usuarios", null, values)
+    }
+
+    // ========== DATOS DEMO ==========
+
+    /**
+     * Rellena la BD con datos realistas para poder demostrar todas las pantallas
+     * sin necesidad de introducir nada manualmente.
+     *
+     * Usuario demo: nombre="admin", contraseña="admin"
+     * Usuario entrenador: nombre="coach", contraseña="admin"
+     *
+     * Incluye:
+     *  - 3 rutinas con ejercicios
+     *  - 10 sesiones de entrenamiento (últimos 28 días)
+     *  - 14 días de registros nutricionales
+     *  - 21 registros de peso corporal (últimos 60 días, bajando de 78 a 75 kg)
+     *  - Vínculo entrenador-cliente entre coach y admin
+     */
+    private fun poblarDatosDemoCompleto(db: SQLiteDatabase) {
+
+        // ── Entrenador (id=2) ─────────────────────────────────────────────
+        val hashCoach = PasswordHasher.hash("admin")
+        db.execSQL("""
+            INSERT INTO usuarios (nombre, password_hash, peso_corporal, calorias_objetivo,
+                proteinas_objetivo, carbs_objetivo, grasas_objetivo, meta, rol)
+            VALUES ('coach', '$hashCoach', 82.0, 2800.0, 180.0, 300.0, 80.0, 'hipertrofia', 'entrenador')
+        """.trimIndent())
+
+        // ── Vínculo coach→admin ───────────────────────────────────────────
+        db.execSQL("INSERT INTO entrenador_cliente (entrenador_id, cliente_id) VALUES (2, 1)")
+
+        // ── Rutinas del admin (usuario_id=1) ──────────────────────────────
+        db.execSQL("INSERT INTO rutinas (usuario_id, nombre, descripcion) VALUES (1, 'Pecho + Tríceps', 'Press plano, aperturas y extensiones de tríceps')")
+        db.execSQL("INSERT INTO rutinas (usuario_id, nombre, descripcion) VALUES (1, 'Espalda + Bíceps', 'Dominadas, remos y curl de bíceps')")
+        db.execSQL("INSERT INTO rutinas (usuario_id, nombre, descripcion) VALUES (1, 'Piernas', 'Sentadilla, prensa, curl femoral y hip thrust')")
+        // rutina IDs: 1, 2, 3
+
+        // Ejercicios rutina 1 – Pecho + Tríceps
+        // ejercicio IDs del catálogo: 1=Press Banca Plano, 4=Aperturas, 6=Fondos, 31=Press Francés, 32=Extensión Tríceps
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (1,  1, 0, 4,  8)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (1,  4, 1, 3, 12)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (1,  6, 2, 3, 10)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (1, 31, 3, 3, 10)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (1, 32, 4, 4, 12)")
+
+        // Ejercicios rutina 2 – Espalda + Bíceps
+        // 17=Dominadas, 18=Jalón, 19=Remo Barra, 28=Curl Bíceps Barra, 29=Curl Martillo
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (2, 17, 0, 4,  8)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (2, 19, 1, 4, 10)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (2, 18, 2, 3, 12)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (2, 28, 3, 4, 10)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (2, 29, 4, 3, 12)")
+
+        // Ejercicios rutina 3 – Piernas
+        // 7=Sentadilla, 9=Prensa, 11=Curl Femoral, 15=Hip Thrust, 16=Elevación Talones
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (3,  7, 0, 4,  8)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (3,  9, 1, 3, 12)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (3, 11, 2, 4, 12)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (3, 15, 3, 3, 12)")
+        db.execSQL("INSERT INTO rutina_ejercicios (rutina_id, ejercicio_id, orden, series_planeadas, reps_planeadas) VALUES (3, 16, 4, 4, 15)")
+
+        // ── Sesiones de entrenamiento (10 sesiones, últimos 28 días) ──────
+        // sesión 1 (-28d): Pecho
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 1, 'Pecho + Tríceps', date('now','-28 days'))")
+        insertarSetsDemo(db, 1,  1, 80.0, 75.0, 70.0, 8)
+        insertarSetsDemo(db, 1,  4, 16.0, 14.0, 12.0, 12)
+        insertarSetsDemo(db, 1, 31, 30.0, 28.0, 26.0, 10)
+
+        // sesión 2 (-25d): Espalda
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 2, 'Espalda + Bíceps', date('now','-25 days'))")
+        insertarSetsDemo(db, 2, 17,  0.0,  0.0,  0.0,  8)
+        insertarSetsDemo(db, 2, 19, 60.0, 55.0, 50.0, 10)
+        insertarSetsDemo(db, 2, 28, 18.0, 16.0, 14.0, 10)
+
+        // sesión 3 (-22d): Piernas
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 3, 'Piernas', date('now','-22 days'))")
+        insertarSetsDemo(db, 3,  7, 100.0,  95.0,  90.0, 8)
+        insertarSetsDemo(db, 3,  9, 130.0, 120.0, 110.0, 12)
+        insertarSetsDemo(db, 3, 11,  40.0,  37.5,  35.0, 12)
+
+        // sesión 4 (-19d): Pecho
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 1, 'Pecho + Tríceps', date('now','-19 days'))")
+        insertarSetsDemo(db, 4,  1, 82.5, 77.5, 72.5, 8)
+        insertarSetsDemo(db, 4,  4, 18.0, 16.0, 14.0, 12)
+        insertarSetsDemo(db, 4, 32, 25.0, 22.5, 20.0, 12)
+
+        // sesión 5 (-16d): Espalda
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 2, 'Espalda + Bíceps', date('now','-16 days'))")
+        insertarSetsDemo(db, 5, 17,  0.0,  0.0,  0.0,  9)
+        insertarSetsDemo(db, 5, 19, 62.5, 57.5, 52.5, 10)
+        insertarSetsDemo(db, 5, 28, 20.0, 18.0, 16.0, 10)
+
+        // sesión 6 (-13d): Piernas
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 3, 'Piernas', date('now','-13 days'))")
+        insertarSetsDemo(db, 6,  7, 102.5,  97.5,  92.5, 8)
+        insertarSetsDemo(db, 6,  9, 135.0, 125.0, 115.0, 12)
+        insertarSetsDemo(db, 6, 15,  70.0,  65.0,  60.0, 12)
+
+        // sesión 7 (-10d): Pecho
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 1, 'Pecho + Tríceps', date('now','-10 days'))")
+        insertarSetsDemo(db, 7,  1, 85.0, 80.0, 75.0, 8)
+        insertarSetsDemo(db, 7,  4, 18.0, 16.0, 14.0, 12)
+        insertarSetsDemo(db, 7, 31, 32.0, 30.0, 28.0, 10)
+
+        // sesión 8 (-7d): Espalda
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 2, 'Espalda + Bíceps', date('now','-7 days'))")
+        insertarSetsDemo(db, 8, 17,  0.0,  0.0,  0.0, 10)
+        insertarSetsDemo(db, 8, 19, 65.0, 60.0, 55.0, 10)
+        insertarSetsDemo(db, 8, 28, 22.0, 20.0, 18.0, 10)
+
+        // sesión 9 (-4d): Piernas
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 3, 'Piernas', date('now','-4 days'))")
+        insertarSetsDemo(db, 9,  7, 105.0, 100.0,  95.0, 8)
+        insertarSetsDemo(db, 9,  9, 140.0, 130.0, 120.0, 12)
+        insertarSetsDemo(db, 9, 11,  42.5,  40.0,  37.5, 12)
+
+        // sesión 10 (-1d): Pecho
+        db.execSQL("INSERT INTO sesion_entrenamiento (usuario_id, rutina_id, nombre_rutina, fecha) VALUES (1, 1, 'Pecho + Tríceps', date('now','-1 days'))")
+        insertarSetsDemo(db, 10,  1, 87.5, 82.5, 77.5, 8)
+        insertarSetsDemo(db, 10,  4, 20.0, 18.0, 16.0, 12)
+        insertarSetsDemo(db, 10, 32, 27.5, 25.0, 22.5, 12)
+
+        // ── Historial de peso (últimos 60 días, 78 → 75 kg) ──────────────
+        val pesos = listOf(
+            -60 to 78.2, -57 to 77.9, -54 to 78.0, -51 to 77.7, -48 to 77.5,
+            -45 to 77.3, -42 to 77.4, -39 to 77.1, -36 to 76.9, -33 to 76.8,
+            -30 to 76.7, -27 to 76.5, -24 to 76.6, -21 to 76.3, -18 to 76.1,
+            -15 to 75.9, -12 to 75.8,  -9 to 75.7,  -6 to 75.5,  -3 to 75.3,
+              0 to 75.0
+        )
+        pesos.forEach { (dias, peso) ->
+            db.execSQL("INSERT INTO peso_corporal_historico (usuario_id, peso, fecha) VALUES (1, $peso, date('now','$dias days'))")
+        }
+        db.execSQL("UPDATE usuarios SET peso_corporal = 75.0 WHERE id = 1")
+
+        // ── Registro nutricional (últimos 14 días) ────────────────────────
+        // Alimento IDs del catálogo (inserción en orden):
+        //   1 = Pechuga de Pollo (165 kcal, 31g P)
+        //  13 = Huevo Entero     (155 kcal, 13g P)
+        //  18 = Atún al natural  (116 kcal, 26g P)
+        for (d in -13..0) {
+            val f = "date('now','$d days')"
+            db.execSQL("INSERT INTO registro_ingesta (usuario_id, alimento_id, cantidad_g, fecha) VALUES (1, 13, 200.0, $f)") // 2 huevos desayuno
+            db.execSQL("INSERT INTO registro_ingesta (usuario_id, alimento_id, cantidad_g, fecha) VALUES (1,  1, 200.0, $f)") // pechuga comida
+            db.execSQL("INSERT INTO registro_ingesta (usuario_id, alimento_id, cantidad_g, fecha) VALUES (1, 18, 100.0, $f)") // atún merienda
+            db.execSQL("INSERT INTO registro_ingesta (usuario_id, alimento_id, cantidad_g, fecha) VALUES (1,  1, 150.0, $f)") // pechuga cena
+        }
+    }
+
+    /** Inserta 3 sets de un ejercicio en una sesión con pesos progresivos descendentes. */
+    private fun insertarSetsDemo(
+        db: SQLiteDatabase,
+        sesionId: Int,
+        ejercicioId: Int,
+        p1: Double, p2: Double, p3: Double,
+        reps: Int
+    ) {
+        listOf(1 to p1, 2 to p2, 3 to p3).forEach { (set, peso) ->
+            db.execSQL("""
+                INSERT INTO registro_set (sesion_id, ejercicio_id, numero_set, peso, reps_planeadas, reps_reales)
+                VALUES ($sesionId, $ejercicioId, $set, $peso, $reps, $reps)
+            """.trimIndent())
+        }
     }
 
     // ========== MÉTODOS LEGACY (compatibilidad con código antiguo) ==========

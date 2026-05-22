@@ -1,96 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F9">
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
 
+    <!-- ── Header ── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_picture_as_pdf"
+            app:tint="@color/colorHistorial"
+            android:layout_marginEnd="12dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="📄 Exportar informe PDF"
-            android:textSize="22sp"
+            android:layout_weight="1"
+            android:text="Exportar Informe PDF"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#F57F17"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/colorOnSurface"/>
+    </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:layout_marginBottom="14dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <!-- ── Periodo ──────────────────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="#FFFFFF">
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorHistorialLight"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="14dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Selecciona el periodo del informe:"
-                    android:textStyle="bold"
-                    android:textColor="#424242"
-                    android:layout_marginBottom="8dp" />
-
-                <RadioGroup
-                    android:id="@+id/rgPeriodo"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <RadioButton
-                        android:id="@+id/rbSemanal"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Semanal (últimos 7 días)"
-                        android:checked="true" />
+                        android:text="Periodo del informe"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorHistorial"
+                        android:layout_marginBottom="12dp"/>
 
-                    <RadioButton
-                        android:id="@+id/rbMensual"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:id="@+id/rgPeriodo"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mensual (últimos 30 días)" />
-                </RadioGroup>
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvEstadoPdf"
+                        <RadioButton
+                            android:id="@+id/rbSemanal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Semanal (7 días)"
+                            android:textColor="@color/colorOnSurfaceVariant"
+                            android:checked="true"/>
+
+                        <RadioButton
+                            android:id="@+id/rbMensual"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Mensual (30 días)"
+                            android:textColor="@color/colorOnSurfaceVariant"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Contenido ────────────────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorHistorialLight"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#00796B"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnGenerarPdf"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:text="Generar y compartir PDF"
-            android:backgroundTint="#F57F17"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Incluir en el informe"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorHistorial"
+                        android:layout_marginBottom="10dp"/>
 
-        <Button
-            android:id="@+id/btnVolverPdf"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Volver"
-            android:backgroundTint="#757575"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp" />
-    </LinearLayout>
-</ScrollView>
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/cbExportarEntrenamientos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Entrenamientos y volumen"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:checked="true"/>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/cbExportarNutricion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Resumen nutricional diario"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:checked="true"/>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/cbExportarPerfil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Perfil corporal y objetivos"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:checked="true"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Estado de generación ──────────────────────────────────── -->
+            <TextView
+                android:id="@+id/tvEstadoPdf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="13sp"
+                android:textColor="@color/colorNutricion"
+                android:gravity="center"
+                android:paddingBottom="12dp"/>
+
+            <!-- ── Botón generar ─────────────────────────────────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGenerarPdf"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:text="GENERAR PDF"
+                android:textStyle="bold"
+                app:backgroundTint="@color/colorHistorial"
+                android:textColor="@color/colorBackground"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_picture_as_pdf"
+                app:iconSize="20dp"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- ── Botón volver ──────────────────────────────────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVolverPdf"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Volver"
+                app:backgroundTint="@color/colorSurfaceElevated"
+                android:textColor="@color/colorTextSecondary"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconSize="18dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

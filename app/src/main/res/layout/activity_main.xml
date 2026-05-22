@@ -4,55 +4,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp"
-    android:background="#F5F5F5">
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DÍA A IA"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="#1A237E"
-        android:layout_marginBottom="40dp"/>
-
-    <EditText
-        android:id="@+id/etUsuario"
+    <!-- ── Cabecera oscura con gradiente ── -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:hint="Usuario"
-        android:inputType="text"
-        android:padding="12dp"
-        android:background="@android:drawable/editbox_background"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/gradient_header"
+        android:paddingBottom="36dp">
 
-    <EditText
-        android:id="@+id/etPassword"
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/ic_bolt"
+            app:tint="#F5CC2A"
+            android:background="@drawable/bg_icon_circle"
+            android:backgroundTint="#2A220A"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DÍA A IA"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:textColor="#EAEAF5"
+            android:letterSpacing="0.1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tu asistente de entrenamiento y nutrición"
+            android:textSize="13sp"
+            android:textColor="#888899"
+            android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+    <!-- ── Formulario ── -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:padding="12dp"
-        android:background="@android:drawable/editbox_background"
-        android:layout_marginBottom="24dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:background="@drawable/bg_login_card"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="24dp">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="ENTRAR"
-        android:textStyle="bold"
-        android:backgroundTint="#1A237E"
-        app:cornerRadius="8dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryLight"
+            android:layout_marginBottom="24dp"/>
 
-    <Button
-        android:id="@+id/btnIrARegistro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¿No tienes cuenta? Regístrate aquí"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:textColor="#3F51B5"
-        android:layout_marginTop="16dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Usuario"
+            style="@style/Widget.DiaAIA.TextInputLayout"
+            android:layout_marginBottom="14dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/colorOnSurface"
+                android:imeOptions="actionNext"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            style="@style/Widget.DiaAIA.TextInputLayout"
+            app:endIconMode="password_toggle"
+            android:layout_marginBottom="28dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/colorOnSurface"
+                android:imeOptions="actionDone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="ENTRAR"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnIrARegistro"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes cuenta? Regístrate aquí"
+            android:textColor="@color/colorSecondary"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
 
 </LinearLayout>

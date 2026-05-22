@@ -1,136 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F9">
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
 
+    <!-- ── Header ── -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_bar_chart"
+            app:tint="@color/colorHistorial"
+            android:layout_marginEnd="12dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="📊 Gráficas de progreso"
-            android:textSize="22sp"
+            android:layout_weight="1"
+            android:text="Estadísticas"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#C62828"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:layout_marginBottom="14dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1RM estimado (Epley)"
-                    android:textStyle="bold"
-                    android:textColor="#1565C0" />
-
-                <Spinner
-                    android:id="@+id/spEjercicioEstad"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp" />
-
-                <TextView
-                    android:id="@+id/tvEjerciciosVacio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Aún no has registrado ningún ejercicio con peso."
-                    android:gravity="center"
-                    android:textColor="#9E9E9E"
-                    android:padding="8dp"
-                    android:visibility="gone" />
-
-                <com.example.diaaia.ui.SimpleLineChart
-                    android:id="@+id/chart1RM"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:layout_marginBottom="14dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Evolución peso corporal"
-                    android:textStyle="bold"
-                    android:textColor="#2E7D32"
-                    android:layout_marginBottom="6dp" />
-
-                <com.example.diaaia.ui.SimpleLineChart
-                    android:id="@+id/chartPesoCorporal"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:layout_marginBottom="14dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Calorías diarias"
-                    android:textStyle="bold"
-                    android:textColor="#E53935"
-                    android:layout_marginBottom="6dp" />
-
-                <com.example.diaaia.ui.SimpleLineChart
-                    android:id="@+id/chartKcal"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btnVolverEstad"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Volver"
-            android:backgroundTint="#757575"
-            android:textColor="#FFFFFF"
-            app:cornerRadius="8dp" />
+            android:textColor="@color/colorOnSurface"/>
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ── Bloque 1RM ──────────────────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorEntrenamientoLight"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1RM estimado por ejercicio"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorEntrenamiento"
+                        android:layout_marginBottom="10dp"/>
+
+                    <!-- Spinner para seleccionar ejercicio -->
+                    <Spinner
+                        android:id="@+id/spEjercicioEstad"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@color/colorSurfaceElevated"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <!-- Estado vacío -->
+                    <TextView
+                        android:id="@+id/tvEjerciciosVacio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aún no hay entrenamientos registrados."
+                        android:textSize="13sp"
+                        android:textColor="@color/colorTextSecondary"
+                        android:gravity="center"
+                        android:paddingBottom="8dp"
+                        android:visibility="gone"/>
+
+                    <!-- Gráfica 1RM -->
+                    <com.example.diaaia.ui.SimpleLineChart
+                        android:id="@+id/chart1RM"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Bloque peso corporal ───────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorNutricionLight"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="14dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Evolución de peso corporal (kg)"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorNutricion"
+                        android:layout_marginBottom="10dp"/>
+
+                    <com.example.diaaia.ui.SimpleLineChart
+                        android:id="@+id/chartPesoCorporal"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Bloque calorías ───────────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurfaceVariant"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/colorIALight"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calorías diarias (últimos 30 días)"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorIA"
+                        android:layout_marginBottom="10dp"/>
+
+                    <com.example.diaaia.ui.SimpleLineChart
+                        android:id="@+id/chartKcal"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── Botón volver ──────────────────────────────────────────── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVolverEstad"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="VOLVER AL MENÚ"
+                app:backgroundTint="@color/colorSurfaceElevated"
+                android:textColor="@color/colorOnSurface"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconSize="18dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

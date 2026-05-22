@@ -4,19 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F4F7F9"
-    android:padding="16dp">
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- ── Header ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="🏋️ Elige rutina"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#1A237E"
-        android:layout_gravity="center"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp"
+            android:src="@drawable/ic_play_arrow" app:tint="@color/colorEntrenamiento" android:layout_marginEnd="12dp"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Elige Rutina" android:textSize="20sp"
+            android:textStyle="bold" android:textColor="@color/colorOnSurface"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvVacioSeleccion"
@@ -24,34 +30,43 @@
         android:layout_height="wrap_content"
         android:text="No tienes rutinas creadas.\nPuedes entrenar en modo libre."
         android:gravity="center"
-        android:textColor="#757575"
+        android:textColor="@color/colorTextHint"
         android:padding="24dp"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSeleccionRutina"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:clipToPadding="false"/>
 
-    <Button
-        android:id="@+id/btnEntrenoLibre"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="ENTRENO LIBRE (sin rutina)"
-        android:backgroundTint="#FF8F00"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="8dp"
-        android:layout_marginTop="10dp" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVolverSeleccion"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="Volver"
-        android:backgroundTint="#757575"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="8dp"
-        android:layout_marginTop="8dp" />
+        android:layout_height="48dp"
+        android:text="CANCELAR"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        app:backgroundTint="@color/colorSurfaceElevated"
+        android:textColor="@color/colorTextSecondary"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_close"
+        app:iconSize="18dp"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEntrenoLibre"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="ENTRENAR SIN RUTINA"
+        android:layout_margin="12dp"
+        app:backgroundTint="@color/colorEntrenamientoLight"
+        app:strokeColor="@color/colorEntrenamiento"
+        app:strokeWidth="1dp"
+        android:textColor="@color/colorEntrenamiento"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_play_arrow"
+        app:iconSize="20dp"/>
 </LinearLayout>

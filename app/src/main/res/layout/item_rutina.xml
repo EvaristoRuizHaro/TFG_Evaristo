@@ -1,52 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp">
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/colorSurfaceVariant"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/colorEntrenamientoLight"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="14dp"
-        android:gravity="center_vertical"
-        android:background="#FFFFFF">
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorEntrenamiento"
+            android:minHeight="64dp"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="14dp">
 
             <TextView
                 android:id="@+id/tvNombreRutina"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre rutina"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:textColor="#1565C0" />
+                android:textColor="@color/colorEntrenamiento"/>
 
             <TextView
                 android:id="@+id/tvDescripcionRutina"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descripción"
-                android:textSize="13sp"
-                android:textColor="#616161"
-                android:layout_marginTop="4dp" />
+                android:textSize="12sp"
+                android:textColor="@color/colorTextSecondary"
+                android:layout_marginTop="3dp"/>
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/btnBorrarRutina"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@android:drawable/ic_menu_delete"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/ic_delete"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Borrar" />
-
+            app:tint="@color/colorError"
+            android:contentDescription="Borrar"/>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

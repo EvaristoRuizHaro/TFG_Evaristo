@@ -1,7 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.DiaAIA" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+    <style name="Base.Theme.DiaAIA" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryContainer</item>
+        <item name="colorTertiary">@color/colorTertiary</item>
+        <item name="colorTertiaryContainer">@color/colorTertiaryContainer</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorErrorContainer">@color/colorErrorContainer</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
+        <item name="colorOutline">@color/colorOutline</item>
+        <item name="materialButtonStyle">@style/Widget.DiaAIA.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.DiaAIA.Button.Outlined</item>
+        <item name="textInputStyle">@style/Widget.DiaAIA.TextInputLayout</item>
+    </style>
+
+    <style name="Theme.DiaAIA" parent="Base.Theme.DiaAIA" />
+
+    <style name="Widget.DiaAIA.Button" parent="Widget.Material3.Button">
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.DiaAIA.Button</item>
+    </style>
+
+    <style name="Widget.DiaAIA.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.DiaAIA.Button</item>
+        <item name="strokeColor">@color/colorOutline</item>
+    </style>
+
+    <style name="Widget.DiaAIA.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="Widget.DiaAIA.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorOutline</item>
+        <item name="hintTextColor">@color/colorTextSecondary</item>
+        <item name="boxBackgroundColor">@color/colorSurfaceVariant</item>
+        <item name="android:textColorHint">@color/colorTextHint</item>
+    </style>
+
+    <style name="ShapeAppearance.DiaAIA.Button" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Widget.DiaAIA.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/colorSurface</item>
+        <item name="titleTextColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="Widget.DiaAIA.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/colorSurfaceVariant</item>
+    </style>
+
+    <style name="TextAppearance.DiaAIA.ScreenTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.DiaAIA.SectionTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

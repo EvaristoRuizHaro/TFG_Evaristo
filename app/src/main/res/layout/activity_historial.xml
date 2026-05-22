@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F4F7F9"
-    android:padding="16dp">
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- ── Header ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mi Actividad"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#1A237E"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_history"
+            app:tint="@color/colorHistorial"
+            android:layout_marginEnd="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mi Actividad"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnSurface"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvVacioHistorial"
@@ -22,8 +41,8 @@
         android:layout_height="wrap_content"
         android:text="Aún no hay actividad registrada."
         android:gravity="center"
-        android:textColor="#9E9E9E"
-        android:padding="16dp"
+        android:textColor="@color/colorTextHint"
+        android:padding="24dp"
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -31,13 +50,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:clipToPadding="false"
         android:scrollbars="vertical"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVolverHistorial"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="52dp"
         android:text="VOLVER AL MENÚ"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#607D8B"/>
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/colorSurfaceElevated"
+        android:textColor="@color/colorOnSurface"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_arrow_back"
+        app:iconSize="18dp"/>
 </LinearLayout>
