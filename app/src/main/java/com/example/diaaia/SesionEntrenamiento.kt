@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diaaia.model.DatabaseHelper
@@ -228,13 +229,16 @@ class SesionEntrenamiento : AppCompatActivity() {
             .inflate(R.layout.item_set_row, ej.container, false)
 
         val tvLabel = row.findViewById<TextView>(R.id.tvSetLabel)
+        val tilPeso = row.findViewById<TextInputLayout>(R.id.tilPesoSet)
         val etPeso = row.findViewById<EditText>(R.id.etPesoSet)
+        val tilReps = row.findViewById<TextInputLayout>(R.id.tilRepsSet)
         val etReps = row.findViewById<EditText>(R.id.etRepsSet)
         val btnGuardar = row.findViewById<ImageButton>(R.id.btnGuardarSet)
 
         tvLabel.text = "Set $numeroSet"
-        etReps.hint = "reps (plan: ${ej.repsPlaneadas})"
-        etPeso.hint = "kg"
+        // El hint va en el TextInputLayout (label flotante), no en el EditText interior
+        tilReps.hint = "reps (plan: ${ej.repsPlaneadas})"
+        // tilPeso ya tiene android:hint="kg" en XML, no se toca
         etPeso.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         etReps.inputType = InputType.TYPE_CLASS_NUMBER
 

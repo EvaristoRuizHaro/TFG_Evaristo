@@ -135,7 +135,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGuardarEntreno"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="wrap_content"
+                android:minHeight="54dp"
                 android:text="GUARDAR REGISTRO"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
@@ -148,7 +149,8 @@
                 android:id="@+id/btnVolverEntreno"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="Cancelar y volver"
                 android:textColor="@color/colorTextSecondary"
                 android:layout_marginTop="4dp"/>

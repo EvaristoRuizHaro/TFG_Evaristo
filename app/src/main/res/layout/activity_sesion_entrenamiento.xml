@@ -59,7 +59,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAnadirEjSesion"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="AÑADIR EJERCICIO"
             app:backgroundTint="@color/colorNutricionLight"
             app:strokeColor="@color/colorNutricion"
@@ -73,7 +74,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFinalizarSesion"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
+            android:minHeight="52dp"
             android:text="FINALIZAR SESIÓN"
             android:textStyle="bold"
             app:backgroundTint="@color/colorEntrenamiento"
@@ -85,7 +87,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelarSesion"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="Cancelar sesión"
             app:backgroundTint="@color/colorErrorContainer"
             android:textColor="@color/colorError"

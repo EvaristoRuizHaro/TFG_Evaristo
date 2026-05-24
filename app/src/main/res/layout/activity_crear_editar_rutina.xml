@@ -93,7 +93,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAnadirEjercicio"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="AÑADIR EJERCICIO"
                 app:backgroundTint="@color/colorEntrenamientoLight"
                 app:strokeColor="@color/colorEntrenamiento"
@@ -117,7 +118,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarRutina"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:minHeight="52dp"
             android:layout_weight="1"
             android:text="GUARDAR"
             android:textStyle="bold"
@@ -130,7 +132,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCancelarRutina"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:minHeight="52dp"
             android:layout_weight="1"
             android:text="Cancelar"
             app:backgroundTint="@color/colorSurfaceElevated"

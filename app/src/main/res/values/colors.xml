@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ── Dark backgrounds ── -->
-    <color name="colorBackground">#0B0B10</color>
-    <color name="colorSurface">#161622</color>
-    <color name="colorSurfaceVariant">#1E1E2E</color>
-    <color name="colorSurfaceElevated">#26263A</color>
-    <color name="colorDivider">#2A2A3C</color>
-    <color name="colorOutline">#3A3A50</color>
+    <!-- Fondos oscuros -->
+    <color name="colorBackground">#0D0D15</color>
+    <color name="colorSurface">#17172A</color>
+    <color name="colorSurfaceVariant">#1E1E30</color>
+    <color name="colorSurfaceElevated">#25253C</color>
+    <color name="colorDivider">#28283D</color>
+    <color name="colorOutline">#38384E</color>
 
-    <!-- ── Primary: indigo claro (dark bg) ── -->
+    <!-- Primario: indigo -->
     <color name="colorPrimary">#7986CB</color>
     <color name="colorPrimaryDark">#5C6BC0</color>
     <color name="colorPrimaryLight">#9FA8DA</color>
-    <color name="colorPrimaryContainer">#1A1D40</color>
+    <color name="colorPrimaryContainer">#1C1F42</color>
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorOnPrimaryContainer">#C5CAE9</color>
 
-    <!-- ── Secondary: teal ── -->
+    <!-- Secundario: teal -->
     <color name="colorSecondary">#38C5A5</color>
     <color name="colorSecondaryLight">#64D8C0</color>
-    <color name="colorSecondaryContainer">#0A2A22</color>
+    <color name="colorSecondaryContainer">#0A2825</color>
     <color name="colorOnSecondary">#FFFFFF</color>
 
-    <!-- ── Tertiary: green ── -->
+    <!-- Terciario: verde -->
     <color name="colorTertiary">#3DBE8A</color>
     <color name="colorTertiaryLight">#69D4A8</color>
-    <color name="colorTertiaryContainer">#0E2A1A</color>
+    <color name="colorTertiaryContainer">#0D2C1C</color>
 
-    <!-- ── Error ── -->
+    <!-- Error -->
     <color name="colorError">#EF6363</color>
-    <color name="colorErrorContainer">#3A1010</color>
+    <color name="colorErrorContainer">#3B1212</color>
 
-    <!-- ── Text ── -->
-    <color name="colorOnBackground">#EAEAF5</color>
-    <color name="colorOnSurface">#EAEAF5</color>
-    <color name="colorOnSurfaceVariant">#BBBBCC</color>
-    <color name="colorTextSecondary">#888899</color>
-    <color name="colorTextHint">#555566</color>
+    <!-- Texto -->
+    <color name="colorOnBackground">#E8E8F4</color>
+    <color name="colorOnSurface">#E8E8F4</color>
+    <color name="colorOnSurfaceVariant">#B8B8CA</color>
+    <color name="colorTextSecondary">#85859A</color>
+    <color name="colorTextHint">#52526A</color>
 
-    <!-- ── Módulos ── -->
+    <!-- Colores por módulo -->
     <color name="colorNutricion">#3DBE8A</color>
-    <color name="colorNutricionLight">#0E2A1A</color>
+    <color name="colorNutricionLight">#0D2C1C</color>
     <color name="colorEntrenamiento">#5B9CF6</color>
-    <color name="colorEntrenamientoLight">#1A2540</color>
+    <color name="colorEntrenamientoLight">#192542</color>
     <color name="colorIA">#B87AFF</color>
-    <color name="colorIALight">#1E1230</color>
+    <color name="colorIALight">#1E1232</color>
     <color name="colorHistorial">#F5A623</color>
-    <color name="colorHistorialLight">#2A1C0A</color>
+    <color name="colorHistorialLight">#2B1C08</color>
     <color name="colorEstadisticas">#EF6363</color>
-    <color name="colorEstadisticasLight">#2A0F0F</color>
+    <color name="colorEstadisticasLight">#2C0F0F</color>
     <color name="colorExportar">#F5CC2A</color>
-    <color name="colorExportarLight">#2A220A</color>
-    <color name="colorClientes">#38C5A5</color>
-    <color name="colorClientesLight">#0A2A22</color>
-    <color name="colorSalir">#EF6363</color>
-    <color name="colorSalirLight">#2A0F14</color>
+    <color name="colorExportarLight">#2C2208</color>
+    <color name="colorClientes">#30B8A2</color>
+    <color name="colorClientesLight">#0A2622</color>
+    <color name="colorSalir">#D95454</color>
+    <color name="colorSalirLight">#2C0F11</color>
 
-    <!-- ── Básicos ── -->
+    <!-- Básicos -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
